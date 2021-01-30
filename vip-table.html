@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo VIP table</title>
+    <style>
+        /* set overflow for table container */
+        .table-container {
+            border: 1px solid black;
+            width: 90vw;
+            height: 90vh;
+            overflow: auto;
+        }
+
+        /* edit style */
+        .table-container tr td {
+            border: 1px solid black;
+        }
+
+        .table-container tr td .inside_td {
+            height: 50px;
+            width: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* set position sticky for all td fixed */
+        .table-container tr .position-sticky {
+            position: sticky;
+        }
+
+        /* fixed all top td */
+        .table-container .td_top {
+            background: blueviolet;
+            z-index: 1;
+            top: -1px;
+        }
+
+        /* fixed top lef td */
+        .table-container .td_top_left {
+            background: beige;
+            z-index: 2;
+            top: -1px;
+            left: -1px;
+        }
+
+        /* fixed left td */
+        .table-container .td_left {
+            background: aquamarine;
+            z-index: 1;
+            left: -1px;
+        }
+
+        /* fixed bottom td */
+        .table-container .td_bottom {
+            background: chartreuse;
+            z-index: 1;
+            bottom: -1px;
+        }
+
+        /* fixed bottom left td */
+        .table-container .td_bottom_left {
+            background: beige;
+            z-index: 2;
+            bottom: -1px;
+            left: -1px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        Table VIP by Manh DEV
+    </div>
+
+    <div class="table-container"></div>
+
+    <script>
+        function initElement(tag_name, my_class, value) {
+            return "<" + tag_name + " class='" + my_class + "'>" + value + "</" + tag_name + ">"
+        }
+
+        function insertMuntiElement(
+            first_element,
+            nomal_element, amount_nomal_element,
+            end_element
+        ) {
+            var inner = ""
+
+            inner += first_element
+            for (let i = 0; i < amount_nomal_element - 1; i++) inner += nomal_element
+            inner += end_element
+
+            return inner
+        }
+
+        function editTagContentByClass(class_name, new_content) {
+            // get tag
+            var tag = document.getElementsByClassName(class_name)
+            if (!tag || !tag[0]) return
+            tag = tag[0]
+            // get tag
+
+            tag.innerHTML = new_content
+        }
+
+        function initTable(amount_tr, amount_td) {
+            // init td
+            var td_top_left = initElement(
+                'td',
+                'position-sticky td_top_left',
+                initElement('div', 'inside_td', 'goc tren nhe')
+            )
+            var td_bottom_left = initElement(
+                'td',
+                'position-sticky td_bottom_left',
+                initElement('div', 'inside_td', 'goc duoi nhe')
+            )
+            var td_top = initElement(
+                'td',
+                'position-sticky td_top',
+                initElement('div', 'inside_td', 'ben tren nhe')
+            )
+            var td_left = initElement(
+                'td',
+                'position-sticky td_left',
+                initElement('div', 'inside_td', 'ben trai nhe')
+            )
+            var td_basic = initElement(
+                'td',
+                'td_basic',
+                initElement('div', 'inside_td', 'o giua nhe')
+            )
+            var td_bottom = initElement(
+                'td',
+                'position-sticky td_bottom',
+                initElement('div', 'inside_td', 'ben duoi nhe')
+            )
+            // init td
+
+            // init tr
+            var tr_top = initElement(
+                'tr',
+                '',
+                insertMuntiElement(td_top_left, td_top, amount_td, '')
+            )
+            var tr_basic = initElement(
+                'tr',
+                '',
+                insertMuntiElement(td_left, td_basic, amount_td, '')
+            )
+            var tr_bottom = initElement(
+                'tr',
+                '',
+                insertMuntiElement(td_bottom_left, td_bottom, amount_td, '')
+            )
+            // init tr
+
+            // init table
+            var table_content = initElement(
+                'table',
+                '',
+                insertMuntiElement(tr_top, tr_basic, amount_tr, tr_bottom)
+            )
+            // init table
+
+            editTagContentByClass('table-container', table_content)
+        }
+
+        initTable(100, 100)
+    </script>
+</body>
+
+</html>

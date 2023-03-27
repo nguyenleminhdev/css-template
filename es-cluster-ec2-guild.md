@@ -58,10 +58,9 @@ xpack.security.transport.ssl.truststore.path: certs/transport.p12
 
 # --------------------------- Authen AWS api -----------------------------------
 /usr/share/elasticsearch/bin/elasticsearch-keystore add discovery.ec2.access_key
-AKIARFCON2JNDZSJCXXA
 
 /usr/share/elasticsearch/bin/elasticsearch-keystore add discovery.ec2.secret_key
-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
+
 
 # ----------------------- start elasticsearch ----------------------------------
 sudo systemctl daemon-reload && \
